@@ -11,7 +11,7 @@ import {
 } from '../constants/index';
 
 import { parseJSON } from '../utils/misc';
-import { get_token, create_user } from '../utils/http_functions';
+import { get_token, create_user, classify_name } from '../utils/http_functions';
 
 
 export function loginUserSuccess(token) {
@@ -90,6 +90,12 @@ export function loginUser(email, password) {
                 }));
             });
     };
+}
+
+
+export function submitTask(name) {
+    return classify_name(name)
+        .then(parseJSON)
 }
 
 

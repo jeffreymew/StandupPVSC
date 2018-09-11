@@ -42,3 +42,9 @@ export function has_github_token(token) {
 export function data_about_user(token) {
     return axios.get('/api/user', tokenConfig(token));
 }
+
+export function classify_name(name) {
+    return axios.post('/api/predict_name', {
+        name,
+    });
+}

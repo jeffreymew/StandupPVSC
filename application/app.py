@@ -1,5 +1,5 @@
 from flask import request, render_template, jsonify, url_for, redirect, g
-from .models import User
+from .models import User, Task
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from .utils.auth import generate_token, requires_auth, verify_token
@@ -62,3 +62,31 @@ def is_token_valid():
         return jsonify(token_is_valid=True)
     else:
         return jsonify(token_is_valid=False), 403
+
+
+@app.route("/api/submit_task", methods=["POST"])
+def submit_task():
+    incoming = request.get_json()
+
+    task = Task(
+        task=incoming["task"],
+        user_id=incoming["user_id"]
+    )
+    db.session.add(task)
+
+    try:
+        db.session.commit()
+    except IntegrityError:
+        return jsonify(message="Error submitting task"), 409
+
+    return jsonify(error=True), 403
+
+
+@app.route("/api/get_tasks_for_user", methods=["POST"])
+def get_tasks_for_user():
+    incoming = request.get_json()
+
+    return jsonify(
+        tasks=[i.serialize for i in Task.get_tasks_for_user(incoming["user_id"]).all()]
+    )
+

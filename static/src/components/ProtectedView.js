@@ -3,6 +3,23 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/data';
 
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import AssignmentIcon from '@material-ui/icons/Assignment'
+import Divider from '@material-ui/core/Divider';
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+    },
+  });
+
 function mapStateToProps(state) {
     return {
         data: state.data,
@@ -30,18 +47,34 @@ export default class ProtectedView extends React.Component {
     }
 
     render() {
+        const { classes } = props;
         return (
-            <div>
-                {!this.props.loaded
-                    ? <h1>Loading data...</h1>
-                    :
-                    <div>
-                        <h1>Welcome back,
-                            {this.props.userName}!</h1>
-                        <h1>{this.props.data.data.email}</h1>
-                    </div>
-                }
-            </div>
+            <div className={classes.root}>
+                <List>
+                <ListItem>
+                    <Avatar>
+                    <AssignmentIcon />
+                    </Avatar>
+                    <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+                </ListItem>
+                <li>
+                    <Divider inset />
+                </li>
+                <ListItem>
+                    <Avatar>
+                    <AssignmentIcon />
+                    </Avatar>
+                    <ListItemText primary="Work" secondary="Jan 7, 2014" />
+                </ListItem>
+                <Divider inset component="li" />
+                <ListItem>
+                    <Avatar>
+                    <AssignmentIcon />
+                    </Avatar>
+                    <ListItemText primary="Vacation" secondary="July 20, 2014" />
+                </ListItem>
+                </List>
+          </div>
         );
     }
 }
@@ -52,4 +85,5 @@ ProtectedView.propTypes = {
     userName: React.PropTypes.string,
     data: React.PropTypes.any,
     token: React.PropTypes.string,
+    classes: PropTypes.object.isRequired,
 };

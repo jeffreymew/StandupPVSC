@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AppBar from 'material-ui/AppBar';
-import LeftNav from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-import Divider from 'material-ui/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import LeftNav from '@material-ui/core/Drawer';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 import * as actionCreators from '../../actions/auth';
 
@@ -89,13 +89,25 @@ export class Header extends Component {
                             </div>
                     }
                 </LeftNav>
-                <AppBar
+
+                <AppBar position="static">
+                    <Toolbar>
+                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="title" color="inherit" className={classes.flex}>
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+                {/* <AppBar
                   title="React-Redux-Flask"
                   onLeftIconButtonTouchTap={() => this.openNav()}
                   iconElementRight={
-                      <FlatButton label="Home" onClick={() => this.dispatchNewRoute('/')} />
+                      <Button label="Home" onClick={() => this.dispatchNewRoute('/')} />
                     }
-                />
+                /> */}
             </header>
 
         );
