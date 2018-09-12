@@ -82,6 +82,13 @@ def submit_task():
     return jsonify(error=True), 403
 
 
+@app.route("/api/get_latest_tasks", methods=["GET"])
+def get_latest_tasks():
+    return jsonify(
+        tasks=[i.serialize for i in Task.get_latest_tasks().all()]
+    )
+
+
 @app.route("/api/get_tasks_for_user", methods=["POST"])
 def get_tasks_for_user():
     incoming = request.get_json()

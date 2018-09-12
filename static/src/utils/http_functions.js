@@ -43,8 +43,6 @@ export function data_about_user(token) {
     return axios.get('/api/user', tokenConfig(token));
 }
 
-export function classify_name(name) {
-    return axios.post('/api/predict_name', {
-        name,
-    });
+export function get_latest_tasks(token) {
+    return axios.get('/api/get_latest_tasks', tokenConfig(token))
 }

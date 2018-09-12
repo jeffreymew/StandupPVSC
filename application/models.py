@@ -1,5 +1,5 @@
 from index import db, bcrypt
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class User(db.Model):
@@ -38,9 +38,13 @@ class Task(db.Model):
     user_id = db.Column(db.Integer())
     
     def __init__(self, task, user_id):
-        self.date = datetime.now()
+        self.date = datetime.today()
         self.task = task
         self.user_id = user_id
+    
+    @staticmethod
+    def get_latest_tasks():
+        return Task.query.filter_by(date >= datetime.today())
 
     @staticmethod
     def get_tasks_for_user(user_id):

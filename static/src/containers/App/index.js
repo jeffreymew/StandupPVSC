@@ -1,7 +1,7 @@
 import React from 'react';
 
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 /* application components */
 import { Header } from '../../components/Header';
@@ -17,7 +17,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={createMuiTheme()}>
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <section>
                     <Header />
                     <div

@@ -20,6 +20,7 @@ const initialState = {
     isRegistering: false,
     isRegistered: false,
     registerStatusText: null,
+    people: null,
 };
 
 export default createReducer(initialState, {
@@ -34,6 +35,7 @@ export default createReducer(initialState, {
             isAuthenticated: true,
             token: payload.token,
             userName: jwtDecode(payload.token).email,
+            people: jwtDecode(payload.token).people,
             statusText: 'You have been successfully logged in.',
         }),
     [LOGIN_USER_FAILURE]: (state, payload) =>
