@@ -42,6 +42,8 @@ export default class RegisterView extends React.Component {
             password: '',
             email_error_text: null,
             password_error_text: null,
+            first_name_error_text: null,
+            last_name_error_text: null,
             redirectTo: redirectRoute,
             disabled: true,
         };
@@ -110,7 +112,7 @@ export default class RegisterView extends React.Component {
 
     login(e) {
         e.preventDefault();
-        this.props.registerUser(this.state.email, this.state.password, this.state.redirectTo);
+        this.props.registerUser(this.state.first_name, this.state.last_name, this.state.email, this.state.password, this.state.redirectTo);
     }
 
     render() {
@@ -125,7 +127,25 @@ export default class RegisterView extends React.Component {
                                     {this.props.registerStatusText}
                                 </div>
                         }
-
+                        
+                        <div className="col-md-12">
+                            <TextField
+                              hintText="First Name"
+                              floatingLabelText="First Name"
+                              type="text"
+                              errorText={this.state.first_name_error_text}
+                              onChange={(e) => this.changeValue(e, 'first_name')}
+                            />
+                        </div>
+                        <div className="col-md-12">
+                            <TextField
+                              hintText="Last Name"
+                              floatingLabelText="Last Name"
+                              type="text"
+                              errorText={this.state.last_name_error_text}
+                              onChange={(e) => this.changeValue(e, 'last_name')}
+                            />
+                        </div>
                         <div className="col-md-12">
                             <TextField
                               hintText="Email"

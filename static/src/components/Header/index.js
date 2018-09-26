@@ -93,7 +93,7 @@ export class Header extends Component {
                   title="Python VS Code Standup"
                   onLeftIconButtonTouchTap={() => this.openNav()}
                   iconElementRight={
-                      <FlatButton label="Home" onClick={() => this.dispatchNewRoute('/')} />
+                      <FlatButton label={this.props.userName} onClick={() => this.dispatchNewRoute('/')} />
                     }
                 />
             </header>

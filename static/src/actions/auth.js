@@ -120,10 +120,10 @@ export function registerUserFailure(error) {
     };
 }
 
-export function registerUser(email, password) {
+export function registerUser(f_name, l_name, email, password) {
     return function (dispatch) {
         dispatch(registerUserRequest());
-        return create_user(email, password)
+        return create_user(f_name, l_name, email, password)
             .then(parseJSON)
             .then(response => {
                 try {

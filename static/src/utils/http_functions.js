@@ -21,8 +21,10 @@ export function get_github_access() {
     );
 }
 
-export function create_user(email, password) {
+export function create_user(first_name, last_name, email, password) {
     return axios.post('/api/create_user', {
+        first_name,
+        last_name,
         email,
         password,
     });
@@ -43,6 +45,10 @@ export function data_about_user(token) {
     return axios.get('/api/user', tokenConfig(token));
 }
 
-export function get_latest_tasks(token) {
-    return axios.get('/api/get_latest_tasks', tokenConfig(token))
+export function store_task(user_id, task, status) {
+    return axios.post('/api/submit_task', {
+        task,
+        user_id,
+        status,
+    });
 }

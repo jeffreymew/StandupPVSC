@@ -18,7 +18,8 @@ def any_root_path(path):
 @app.route("/api/user", methods=["GET"])
 @requires_auth
 def get_user():
-    return jsonify(result=g.current_user)
+    return jsonify(result=g.current_user,
+                    tasks=Task.get_latest_tasks())
 
 
 @app.route("/api/create_user", methods=["POST"])
@@ -26,7 +27,9 @@ def create_user():
     incoming = request.get_json()
     user = User(
         email=incoming["email"],
-        password=incoming["password"]
+        password=incoming["password"],
+        first_name=incoming["first_name"],
+        last_name=incoming["last_name"],
     )
     db.session.add(user)
 
@@ -70,7 +73,8 @@ def submit_task():
 
     task = Task(
         task=incoming["task"],
-        user_id=incoming["user_id"]
+        user_id=incoming["user_id"],
+        status=incoming["status"]
     )
     db.session.add(task)
 
@@ -79,14 +83,7 @@ def submit_task():
     except IntegrityError:
         return jsonify(message="Error submitting task"), 409
 
-    return jsonify(error=True), 403
-
-
-@app.route("/api/get_latest_tasks", methods=["GET"])
-def get_latest_tasks():
-    return jsonify(
-        tasks=[i.serialize for i in Task.get_latest_tasks().all()]
-    )
+    return jsonify(success=True)
 
 
 @app.route("/api/get_tasks_for_user", methods=["POST"])
