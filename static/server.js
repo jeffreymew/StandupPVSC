@@ -11,7 +11,7 @@ app.use(require('morgan')('short'));
 
 (function initWebpack() {
     const webpack = require('webpack');
-    const webpackConfig = require('../webpack/common.config');
+    const webpackConfig = require('./webpack/common.config');
 
     const compiler = webpack(webpackConfig);
 
@@ -27,6 +27,7 @@ app.use(require('morgan')('short'));
 }());
 
 app.all(/^\/api\/(.*)/, (req, res) => {
+    // proxy.web(req, res, { target: 'https://jmewflask.azurewebsites.net' }); //TODO point to right python server
     proxy.web(req, res, { target: 'http://localhost:5000' }); //TODO point to right python server
 });
 

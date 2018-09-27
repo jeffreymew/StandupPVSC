@@ -2,13 +2,13 @@ from functools import wraps
 from flask import request, g, jsonify
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired, BadSignature
-from index import app
 
 TWO_WEEKS = 1209600
+SECRET_KEY = "SO_SECURE"
 
 
 def generate_token(user, expiration=TWO_WEEKS):
-    s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
+    s = Serializer(SECRET_KEY, expires_in=expiration)
     token = s.dumps({
         'id': user.id,
         'email': user.email,
@@ -19,7 +19,7 @@ def generate_token(user, expiration=TWO_WEEKS):
 
 
 def verify_token(token):
-    s = Serializer(app.config['SECRET_KEY'])
+    s = Serializer(SECRET_KEY)
     try:
         data = s.loads(token)
     except (BadSignature, SignatureExpired):
