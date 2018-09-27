@@ -1,6 +1,6 @@
 import os
 
-from setup import basedir
+from api.setup import basedir
 
 
 class BaseConfig(object):
