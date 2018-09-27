@@ -1,4 +1,4 @@
-from api.index import db, bcrypt
+from index import db, bcrypt
 from datetime import datetime, timedelta
 
 

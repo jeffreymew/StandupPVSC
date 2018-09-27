@@ -1,5 +1,5 @@
 from flask import Flask
-from api.config import BaseConfig
+from config import BaseConfig
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
